@@ -1,20 +1,27 @@
 import "./App.css";
 import { useState } from "react";
+import { Display } from "./components/Display";
+import Form from "./components/Form";
+import UserList from "./components/UserList";
 
 function App() {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [list, setList] = useState([]);
-  const handleOnchange = (e) => {
-    console.log(e);
-    // const str = e.target.value;
-    const { value } = e.target;
-    setName(value);
-    console.log(value);
-  };
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+
+  const addUser = (name) => {
     setList([...list, name]);
   };
+  // const handleOnchange = (e) => {
+  //   console.log(e);
+  //   // const str = e.target.value;
+  //   const { value } = e.target;
+  //   setName(value);
+  //   console.log(value);
+  // };
+  // const handleOnSubmit = (e) => {
+  //   e.preventDefault();
+  //   setList([...list, name]);
+  // };
   console.log(list);
   return (
     <div
@@ -40,23 +47,9 @@ function App() {
           borderRadius: "10px",
         }}
       >
-        <div className="display">{name}</div>
-
-        <div className="form">
-          <form action="" onSubmit={handleOnSubmit}>
-            <input type="text" onChange={handleOnchange} />
-            <button style={{ margin: "1rem" }}>Add user</button>
-          </form>
-        </div>
+        <Form addUser={addUser} />
         <hr />
-
-        <div className="list">
-          <ul>
-            {list.map((item, i) => {
-              return <li>{item}</li>;
-            })}
-          </ul>
-        </div>
+        <UserList list={list} />
       </div>
     </div>
   );
