@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function App() {
   const [name, setName] = useState("");
+  const [list, setList] = useState([]);
   const handleOnchange = (e) => {
     console.log(e);
     // const str = e.target.value;
@@ -10,6 +11,11 @@ function App() {
     setName(value);
     console.log(value);
   };
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setList([...list, name]);
+  };
+  console.log(list);
   return (
     <div
       className="wrapper"
@@ -37,7 +43,7 @@ function App() {
         <div className="display">{name}</div>
 
         <div className="form">
-          <form action="">
+          <form action="" onSubmit={handleOnSubmit}>
             <input type="text" onChange={handleOnchange} />
             <button style={{ margin: "1rem" }}>Add user</button>
           </form>
@@ -46,8 +52,9 @@ function App() {
 
         <div className="list">
           <ul>
-            <li>sample</li>
-            <li>Sample</li>
+            {list.map((item, i) => {
+              return <li>{item}</li>;
+            })}
           </ul>
         </div>
       </div>
