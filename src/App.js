@@ -1,17 +1,27 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [name, setName] = useState("");
+  const handleOnchange = (e) => {
+    console.log(e);
+    // const str = e.target.value;
+    const { value } = e.target;
+    setName(value);
+    console.log(value);
+  };
   return (
     <div
       className="wrapper"
       style={{
         display: "flex",
         background: "#a5a5ff",
-
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
         fontSize: "2rem",
+        margin: "0",
+        padding: "0",
       }}
     >
       <div
@@ -24,12 +34,12 @@ function App() {
           borderRadius: "10px",
         }}
       >
-        <div className="display">As you are typing</div>
+        <div className="display">{name}</div>
 
         <div className="form">
           <form action="">
-            <input type="text" />
-            <button>Add user</button>
+            <input type="text" onChange={handleOnchange} />
+            <button style={{ margin: "1rem" }}>Add user</button>
           </form>
         </div>
         <hr />
